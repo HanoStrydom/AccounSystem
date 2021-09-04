@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 
 @RestController
-public class DemoController
+public class AccountTypeController
 {
-    @GetMapping("/ping")
+    @GetMapping("/all")
     public GeneralResponse<String> ping(@RequestParam(value="echo", defaultValue = "pong")String echo)
     {
         return new GeneralResponse<String>(true,echo);
