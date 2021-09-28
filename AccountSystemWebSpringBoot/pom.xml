@@ -14,9 +14,7 @@
     <artifactId>AccountSystemWebSpringBoot</artifactId>
     <packaging>war</packaging>
 
-    <!-- Files were created and now inserting code -->
     <dependencies>
-
         <dependency>
             <groupId>za.ac.nwu.ac</groupId>
             <artifactId>AccountSystemDomain</artifactId>
@@ -53,7 +51,6 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-bean-validators</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>

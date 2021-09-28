@@ -10,16 +10,16 @@ import java.util.Set;
 public class Member implements Serializable{
 
     private Long memberID;
-    private Long memberName;
-    private Long memberSurname;
-    private Long contactNum;
+    private String memberName;
+    private String memberSurname;
+    private String contactNum;
 
     private Set<AccountTransaction> accountTransactions;
 
     public Member() {
     }
 
-    public Member(Long memberID, Long memberName, Long memberSurname, Long contactNum) {
+    public Member(Long memberID, String memberName, String memberSurname, String contactNum) {
         this.memberID = memberID;
         this.memberName = memberName;
         this.memberSurname = memberSurname;
@@ -37,17 +37,17 @@ public class Member implements Serializable{
     }
 
     @Column(name = "MEMBER_NAME")
-    public Long getMemberName() {
+    public String getMemberName() {
         return memberName;
     }
 
     @Column(name = "MEMBER_SURNAME")
-    public Long getMemberSurname() {
+    public String getMemberSurname() {
         return memberSurname;
     }
 
     @Column(name = "CONTACT_NUM")
-    public Long getContactNum() {
+    public String getContactNum() {
         return contactNum;
     }
 
@@ -70,17 +70,17 @@ public class Member implements Serializable{
 
 
 
-    public void setMemberName(Long memberName) {
+    public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
 
 
-    public void setMemberSurname(Long memberSurname) {
+    public void setMemberSurname(String memberSurname) {
         this.memberSurname = memberSurname;
     }
 
 
-    public void setContactNum(Long contactNum) {
+    public void setContactNum(String contactNum) {
         this.contactNum = contactNum;
     }
 
