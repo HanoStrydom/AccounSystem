@@ -13,7 +13,8 @@ public class AccountTransaction implements  Serializable{
 
 
     private Long transactionID;
-    private Long accountTypeID;
+    //private Long accountTypeID;
+    private AccountType accountTypeID;
     private Long memberID;
     private Long amount;
     private LocalDate transactionDate;
@@ -21,7 +22,7 @@ public class AccountTransaction implements  Serializable{
     public AccountTransaction() {
     }
 
-    public AccountTransaction(Long transactionID, Long accountTypeID, Long memberID, Long amount, LocalDate transactionDate) {
+    public AccountTransaction(Long transactionID, AccountType accountTypeID, Long memberID, Long amount, LocalDate transactionDate) {
         this.transactionID = transactionID;
         this.accountTypeID = accountTypeID;
         this.memberID = memberID;
@@ -41,12 +42,13 @@ public class AccountTransaction implements  Serializable{
         this.transactionID = transactionID;
     }
 
-    @Column(name = "ACCOUNT_TYPE_ID")
-    public Long getAccountTypeID() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountTypeID")
+    public AccountType getAccountTypeID() {
         return accountTypeID;
     }
 
-    public void setAccountTypeID(Long accountTypeID) {
+    public void setAccountTypeID(AccountType accountTypeID) {
         this.accountTypeID = accountTypeID;
     }
 

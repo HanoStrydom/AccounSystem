@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "ACCOUNT_TYPE", schema = "ACCOUNT_SYSTEM")
@@ -15,6 +16,9 @@ public class AccountType implements Serializable{
     private String accountTypeName;
     private LocalDate creationDate;
 
+    private Set<AccountTransaction> accountTransactions;
+
+
     public AccountType() {
     }
 
@@ -25,6 +29,8 @@ public class AccountType implements Serializable{
         this.creationDate = creationDate;
     }
 
+    //GETTERS
+
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ", sequenceName = "ACCOUNT_SYSTEM.GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "GENERIC_SEQ")
@@ -33,17 +39,9 @@ public class AccountType implements Serializable{
         return accountTypeID;
     }
 
-    public void setAccountTypeID(Long accountTypeID) {
-        this.accountTypeID = accountTypeID;
-    }
-
     @Column(name = "MNEMONIC")
     public String getMnemonic() {
         return mnemonic;
-    }
-
-    public void setMnemonic(String mnemonic) {
-        this.mnemonic = mnemonic;
     }
 
     @Column(name = "ACCOUNT_TYPE_NAME")
@@ -51,19 +49,44 @@ public class AccountType implements Serializable{
         return accountTypeName;
     }
 
-    public void setAccountTypeName(String accountTypeName) {
-        this.accountTypeName = accountTypeName;
-    }
-
     @Column(name = "CREATION_DATE")
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountTypeID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
+        return accountTransactions;
+    }
+
+    //SETTERS
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
+        this.accountTransactions = accountTransactions;
+    }
+
+
+    public void setAccountTypeID(Long accountTypeID) {
+        this.accountTypeID = accountTypeID;
+    }
+
+
+    public void setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
+    }
+
+
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
+    }
+
+
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
+
+    //Hash Goed
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,6 +100,8 @@ public class AccountType implements Serializable{
         return Objects.hash(accountTypeID, mnemonic, accountTypeName, creationDate);
     }
 
+
+    //TO STRING
     @Override
     public String toString() {
         return "AccountType{" +
