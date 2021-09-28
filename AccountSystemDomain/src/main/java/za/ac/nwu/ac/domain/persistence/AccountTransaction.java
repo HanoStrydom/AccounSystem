@@ -13,16 +13,17 @@ public class AccountTransaction implements  Serializable{
 
 
     private Long transactionID;
-    //private Long accountTypeID;
+    //private Long accountTypeID; <--This changes because it becomes a foreign key referencing the AccountType Class
     private AccountType accountTypeID;
-    private Long memberID;
+    //private Long memberID; <--This changes because it becomes a foreign key referencing the Member Class
+    private Member memberID;
     private Long amount;
     private LocalDate transactionDate;
 
     public AccountTransaction() {
     }
 
-    public AccountTransaction(Long transactionID, AccountType accountTypeID, Long memberID, Long amount, LocalDate transactionDate) {
+    public AccountTransaction(Long transactionID, AccountType accountTypeID, Member memberID, Long amount, LocalDate transactionDate) {
         this.transactionID = transactionID;
         this.accountTypeID = accountTypeID;
         this.memberID = memberID;
@@ -52,12 +53,13 @@ public class AccountTransaction implements  Serializable{
         this.accountTypeID = accountTypeID;
     }
 
-    @Column(name = "MEMBER_ID")
-    public Long getMemberID() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberID")
+    public Member getMemberID() {
         return memberID;
     }
 
-    public void setMemberID(Long memberID) {
+    public void setMemberID(Member memberID) {
         this.memberID = memberID;
     }
 

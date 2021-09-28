@@ -3,6 +3,7 @@ package za.ac.nwu.ac.domain.persistence;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "MEMBER", schema = "ACCOUNT_SYSTEM")
@@ -12,6 +13,8 @@ public class Member implements Serializable{
     private Long memberName;
     private Long memberSurname;
     private Long contactNum;
+
+    private Set<AccountTransaction> accountTransactions;
 
     public Member() {
     }
@@ -23,6 +26,8 @@ public class Member implements Serializable{
         this.contactNum = contactNum;
     }
 
+    //GETTERS
+
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ", sequenceName = "ACCOUNT_SYSTEM.GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "GENERIC_SEQ")
@@ -31,17 +36,9 @@ public class Member implements Serializable{
         return memberID;
     }
 
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
-    }
-
     @Column(name = "MEMBER_NAME")
     public Long getMemberName() {
         return memberName;
-    }
-
-    public void setMemberName(Long memberName) {
-        this.memberName = memberName;
     }
 
     @Column(name = "MEMBER_SURNAME")
@@ -49,19 +46,46 @@ public class Member implements Serializable{
         return memberSurname;
     }
 
-    public void setMemberSurname(Long memberSurname) {
-        this.memberSurname = memberSurname;
-    }
-
     @Column(name = "CONTACT_NUM")
     public Long getContactNum() {
         return contactNum;
     }
 
+    //FOREIGN KEY FOR memberID
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "memberID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
+
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
+        this.accountTransactions = accountTransactions;
+    }
+
+    //SETTERS
+    public void setMemberID(Long memberID) {
+        this.memberID = memberID;
+    }
+
+
+
+    public void setMemberName(Long memberName) {
+        this.memberName = memberName;
+    }
+
+
+    public void setMemberSurname(Long memberSurname) {
+        this.memberSurname = memberSurname;
+    }
+
+
     public void setContactNum(Long contactNum) {
         this.contactNum = contactNum;
     }
 
+
+    //HASH
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,6 +99,8 @@ public class Member implements Serializable{
         return Objects.hash(memberID, memberName, memberSurname, contactNum);
     }
 
+
+    //TO STRING
     @Override
     public String toString() {
         return "Member{" +
