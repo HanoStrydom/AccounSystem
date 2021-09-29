@@ -1,5 +1,8 @@
 package za.ac.nwu.ac.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
@@ -7,6 +10,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+@ApiModel(value = "AccountTransaction", description = "A DTO that represents the AccountTransaction")
 public class AccountTransactionDto implements Serializable {
 
     private AccountType accountTypeID;
@@ -37,22 +42,27 @@ public class AccountTransactionDto implements Serializable {
 
 
     //GETTERS
+    @ApiModelProperty(position = 1, value = "AccountType accountTypeID", name = "accountTypeID", notes = "Uniquely idendifies the account type", dataType = "java.lang.AccountType", example = "31597793", required = true)
     public AccountType getAccountTypeID() {
         return accountTypeID;
     }
 
+    @ApiModelProperty(position = 2, value = "Long amount", name = "amount", notes = "Uniquely idendifies the transaction amount", dataType = "java.lang.Long", example = "45 000", required = true)
     public Long getAmount() {
         return amount;
     }
 
+    @ApiModelProperty(position = 3, value = "LocalDate transactionDate", name = "transactionDate", notes = "Uniquely idendifies the transaction date", dataType = "java.lang.LocalDate", example = "2021-09-29", required = true)
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
+    @ApiModelProperty(position = 4, value = "String firstName", name = "firstName", notes = "Uniquely idendifies the customer name", dataType = "java.lang.String", example = "Hano", required = true)
     public String getFirstName() {
         return firstName;
     }
 
+    @ApiModelProperty(position = 5, value = "String lastName", name = "lastName", notes = "Uniquely idendifies the customer surname", dataType = "java.lang.String", example = "Strydom", required = true)
     public String getLastName() {
         return lastName;
     }
@@ -87,6 +97,12 @@ public class AccountTransactionDto implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransactionDto that = (AccountTransactionDto) o;
         return Objects.equals(accountTypeID, that.accountTypeID) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+    }
+
+
+    @JsonIgnore
+    public AccountTransaction getAccountTransaction(){
+        return new AccountTransaction(getAccountTypeID(), getAmount(), getTransactionDate(), getFirstName(),getLastName());
     }
 
     @Override

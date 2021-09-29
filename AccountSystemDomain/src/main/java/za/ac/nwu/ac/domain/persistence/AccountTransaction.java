@@ -32,6 +32,14 @@ public class AccountTransaction implements  Serializable{
         this.lastName = lastName;
     }
 
+    public AccountTransaction(AccountType accountTypeID, Long amount, LocalDate transactionDate, String firstName, String lastName) {
+        this.accountTypeID = accountTypeID;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     //GETTERS
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ", sequenceName = "ACCOUNT_SYSTEM.GENERIC_SEQ", allocationSize = 1)
