@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import za.ac.nwu.ac.domain.persistence.AccountType;
-import za.ac.nwu.ac.domain.persistence.Member;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
@@ -53,13 +51,15 @@ public class AccountTypeController
         return new GeneralResponse<String>(true,echo);
     }
 
-    /*
+
+
     public static void main(String[] args)
     {
         //Member m1 = new Member(123456789L, "Hano", "Strydom", "0722007497");
         //System.out.println(m1.getMemberName());
     }
-       */
+
+
 
 
 }
