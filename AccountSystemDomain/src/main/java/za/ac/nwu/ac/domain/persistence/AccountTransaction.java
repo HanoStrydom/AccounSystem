@@ -49,8 +49,9 @@ public class AccountTransaction implements  Serializable{
         return transactionID;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountTypeID")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "accountTypeID")
+    @JoinColumn(name = "ACCOUNT_TYPE_ID")
     public AccountType getAccountTypeID() {
         return accountTypeID;
     }

@@ -62,7 +62,8 @@ public class AccountType implements Serializable{
 
 
     //FOREIGN KEY FOR accountTypeID
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountTypeID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    //@OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountTypeID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountTypeID", orphanRemoval = true, cascade = CascadeType.ALL)
     public Set<AccountTransaction> getAccountTransactions(){
         return accountTransactions;
     }

@@ -42,22 +42,47 @@ public class AccountTransactionDto implements Serializable {
 
 
     //GETTERS
-    @ApiModelProperty(position = 1, value = "AccountType accountTypeID", name = "accountTypeID", notes = "Uniquely idendifies the account type", dataType = "java.lang.AccountType", example = "31597793", required = true)
+    @ApiModelProperty(position = 1,
+                        value = "AccountType accountTypeID",
+                        name = "accountTypeID",
+                        notes = "Uniquely idendifies the account type",
+                        dataType = "",
+                        example = "31597793",
+                        allowEmptyValue = false,
+                        required = true)
     public AccountType getAccountTypeID() {
         return accountTypeID;
     }
 
-    @ApiModelProperty(position = 2, value = "Long amount", name = "amount", notes = "Uniquely idendifies the transaction amount", dataType = "java.lang.Long", example = "45 000", required = true)
+    @ApiModelProperty(position = 2,
+            value = "AccountTransaction amount",
+            name = "amount",
+            notes = "Uniquely idendifies the transaction amount",
+            dataType = "",
+            example = "450",
+            required = true)
     public Long getAmount() {
         return amount;
     }
 
-    @ApiModelProperty(position = 3, value = "LocalDate transactionDate", name = "transactionDate", notes = "Uniquely idendifies the transaction date", dataType = "java.lang.LocalDate", example = "2021-09-29", required = true)
+    @ApiModelProperty(position = 3,
+            value = "AccountTransaction transactionDate",
+            name = "transactionDate",
+            notes = "Uniquely idendifies the transaction date",
+            dataType = "",
+            example = "2021-09-29",
+            required = true)
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    @ApiModelProperty(position = 4, value = "String firstName", name = "firstName", notes = "Uniquely idendifies the customer name", dataType = "java.lang.String", example = "Hano", required = true)
+    @ApiModelProperty(position = 4,
+            value = "String firstName",
+            name = "firstName",
+            notes = "Uniquely idendifies the customer name",
+            dataType = "java.lang.String",
+            example = "Hano",
+            required = true)
     public String getFirstName() {
         return firstName;
     }
