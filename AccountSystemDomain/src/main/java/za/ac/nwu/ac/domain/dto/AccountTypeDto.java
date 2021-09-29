@@ -1,11 +1,16 @@
 package za.ac.nwu.ac.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+@ApiModel(value = "AccountType",description = "A DTO that represents the AccountType")
 public class AccountTypeDto implements Serializable {
 
     private String mnemonic;
@@ -28,14 +33,17 @@ public class AccountTypeDto implements Serializable {
     }
 
     //Getters
+    @ApiModelProperty(position = 1, value = "AccountType Mnemonic", name = "Mnemonic", notes = "Uniquely idendifies the account type", dataType = "java.lang.String", example = "MILES", required = true)
     public String getMnemonic() {
         return mnemonic;
     }
 
+    @ApiModelProperty(position = 2, value = "AccountType Name", name = "Name", notes = "The name of the account type", dataType = "java.lang.String", example = "MILES",allowEmptyValue = false, required = true)
     public String getAccountTypeName() {
         return accountTypeName;
     }
 
+    @ApiModelProperty(position = 3, value = "AccountType Creation Date", name = "CreationDate", notes = "The date on which the accountType was created", dataType = "java.lang.LocalDate", example = "2020-01-01",allowEmptyValue = true, required = false)
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -61,6 +69,11 @@ public class AccountTypeDto implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         AccountTypeDto that = (AccountTypeDto) o;
         return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(creationDate, that.creationDate);
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType(){
+        return new AccountType(getMnemonic(), getAccountTypeName(), getCreationDate());
     }
 
     @Override
