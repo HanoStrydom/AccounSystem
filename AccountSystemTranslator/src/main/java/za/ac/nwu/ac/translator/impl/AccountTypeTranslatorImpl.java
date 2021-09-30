@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Transactional
 @Component
 public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
@@ -43,7 +45,20 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepository.save(accountTypeDto.getAccountType());
             return new AccountTypeDto(accountType);
         }catch (Exception e){
+
             throw new RuntimeException("Unable to save to the Database",e);
+        }
+    }
+
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonic(String mnemonic) {
+
+        try{
+            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
+            return new AccountTypeDto(accountType);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from the DB",e);
         }
     }
 

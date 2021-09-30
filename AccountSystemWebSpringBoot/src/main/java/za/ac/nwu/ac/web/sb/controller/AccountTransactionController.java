@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
+import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 
@@ -62,12 +63,28 @@ public class AccountTransactionController
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /*
-    @GetMapping("/ping")
-    @ApiOperation(value = "Echo the Ping.", notes = "This echo the ping back to the client")
-    public GeneralResponse<String> ping(@RequestParam(value="echo", defaultValue = "pong")String echo)
-    {
-        return new GeneralResponse<String>(true,echo);
+    //TODO: AccountTransactionController
+    //@GetMapping("{Show-Amount}")
+    @GetMapping("/{transactionID}")
+    @ApiOperation(value =  "Fetches the specified Account", notes = "Fetches the specified Amount for a given TransactionID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "FOUND"),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
+    })
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> getAccountAmount(
+            @ApiParam(value = "TransactionID that uniquely identifies the AccountTransaction",
+                    example = "37",
+                    name = "transactionID",
+                    required = true)
+            @PathVariable("transactionID") final Long transactionID){
+
+        AccountTransactionDto accountTransaction = fetchAccountTransactionFlow.getAccountAmountByTransactionID(transactionID);
+
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-     */
+
 }

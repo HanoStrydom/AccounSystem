@@ -7,7 +7,6 @@ import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
 import javax.transaction.Transactional;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Transactional

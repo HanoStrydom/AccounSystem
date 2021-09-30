@@ -14,7 +14,7 @@ import java.util.Objects;
 @ApiModel(value = "AccountTransaction", description = "A DTO that represents the AccountTransaction")
 public class AccountTransactionDto implements Serializable {
 
-    private AccountType accountTypeID;
+
     private Long amount;
     private LocalDate transactionDate;
     private String firstName;
@@ -24,8 +24,7 @@ public class AccountTransactionDto implements Serializable {
 
     }
 
-    public AccountTransactionDto(AccountType accountTypeID, Long amount, LocalDate transactionDate, String firstName, String lastName) {
-        this.accountTypeID = accountTypeID;
+    public AccountTransactionDto(Long amount, LocalDate transactionDate, String firstName, String lastName) {
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.firstName = firstName;
@@ -33,7 +32,6 @@ public class AccountTransactionDto implements Serializable {
     }
 
     public AccountTransactionDto(AccountTransaction accountTransaction){
-        this.setAccountTypeID(accountTransaction.getAccountTypeID());
         this.setAmount(accountTransaction.getAmount());
         this.setTransactionDate(accountTransaction.getTransactionDate());
         this.setFirstName(accountTransaction.getFirstName());
@@ -42,19 +40,9 @@ public class AccountTransactionDto implements Serializable {
 
 
     //GETTERS
-    @ApiModelProperty(position = 1,
-                        value = "AccountType accountTypeID",
-                        name = "accountTypeID",
-                        notes = "Uniquely idendifies the account type",
-                        dataType = "",
-                        example = "31597793",
-                        allowEmptyValue = false,
-                        required = true)
-    public AccountType getAccountTypeID() {
-        return accountTypeID;
-    }
 
-    @ApiModelProperty(position = 2,
+
+    @ApiModelProperty(position = 1,
             value = "AccountTransaction amount",
             name = "amount",
             notes = "Uniquely idendifies the transaction amount",
@@ -65,7 +53,7 @@ public class AccountTransactionDto implements Serializable {
         return amount;
     }
 
-    @ApiModelProperty(position = 3,
+    @ApiModelProperty(position = 2,
             value = "AccountTransaction transactionDate",
             name = "transactionDate",
             notes = "Uniquely idendifies the transaction date",
@@ -76,7 +64,7 @@ public class AccountTransactionDto implements Serializable {
         return transactionDate;
     }
 
-    @ApiModelProperty(position = 4,
+    @ApiModelProperty(position = 3,
             value = "String firstName",
             name = "firstName",
             notes = "Uniquely idendifies the customer name",
@@ -87,16 +75,13 @@ public class AccountTransactionDto implements Serializable {
         return firstName;
     }
 
-    @ApiModelProperty(position = 5, value = "String lastName", name = "lastName", notes = "Uniquely idendifies the customer surname", dataType = "java.lang.String", example = "Strydom", required = true)
+    @ApiModelProperty(position = 4, value = "String lastName", name = "lastName", notes = "Uniquely idendifies the customer surname", dataType = "java.lang.String", example = "Strydom", required = true)
     public String getLastName() {
         return lastName;
     }
 
 
     //SETTERS
-    public void setAccountTypeID(AccountType accountTypeID) {
-        this.accountTypeID = accountTypeID;
-    }
 
     public void setAmount(Long amount) {
         this.amount = amount;
@@ -121,18 +106,18 @@ public class AccountTransactionDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransactionDto that = (AccountTransactionDto) o;
-        return Objects.equals(accountTypeID, that.accountTypeID) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+        return Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
     }
 
 
     @JsonIgnore
     public AccountTransaction getAccountTransaction(){
-        return new AccountTransaction(getAccountTypeID(), getAmount(), getTransactionDate(), getFirstName(),getLastName());
+        return new AccountTransaction(getAmount(), getTransactionDate(), getFirstName(),getLastName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeID, amount, transactionDate, firstName, lastName);
+        return Objects.hash(amount, transactionDate, firstName, lastName);
     }
 
 
@@ -140,7 +125,6 @@ public class AccountTransactionDto implements Serializable {
     @Override
     public String toString() {
         return "AccountTransactionDto{" +
-                "accountTypeID=" + accountTypeID +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 ", firstName='" + firstName + '\'' +

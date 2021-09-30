@@ -11,9 +11,7 @@ import java.util.Objects;
 @Table(name = "ACCOUNT_TRANSACTION", schema = "ACCOUNT_SYSTEM")
 public class AccountTransaction implements  Serializable{
 
-
     private Long transactionID;
-    //private Long accountTypeID; <--This changes because it becomes a foreign key referencing the AccountType Class
     private AccountType accountTypeID;
     private Long amount;
     private LocalDate transactionDate;
@@ -40,6 +38,13 @@ public class AccountTransaction implements  Serializable{
         this.lastName = lastName;
     }
 
+    public AccountTransaction(Long amount, LocalDate transactionDate, String firstName, String lastName) {
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     //GETTERS
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ", sequenceName = "ACCOUNT_SYSTEM.GENERIC_SEQ", allocationSize = 1)
@@ -50,7 +55,6 @@ public class AccountTransaction implements  Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "accountTypeID")
     @JoinColumn(name = "ACCOUNT_TYPE_ID")
     public AccountType getAccountTypeID() {
         return accountTypeID;

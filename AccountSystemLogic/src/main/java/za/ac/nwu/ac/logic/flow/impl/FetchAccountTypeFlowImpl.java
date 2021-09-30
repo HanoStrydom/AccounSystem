@@ -22,10 +22,12 @@ public class FetchAccountTypeFlowImpl implements FetchAccountTypeFlow {
 
     @Override
     public List<AccountTypeDto> getAllAccountTypes() {
-
-        //List<AccountTypeDto> accountTypeDtos = new ArrayList<>();
-        //accountTypeDtos.add(new AccountTypeDto("Miles", "Miles", LocalDate.now()));
-
         return accountTypeTranslator.getAllAccountTypes();
+    }
+
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonic(String mnemonic) {
+        return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
+        //return accountTypeTranslator.getAccountTypeByMnemonicNativeQuery(mnemonic);
     }
 }

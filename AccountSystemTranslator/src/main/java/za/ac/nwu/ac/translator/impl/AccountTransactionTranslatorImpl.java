@@ -49,4 +49,15 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             throw new RuntimeException("Unable to save to the Database",e);
         }
     }
+
+    @Override
+    public AccountTransactionDto getAccountAmountByTransactionID(Long transactionID) {
+        try{
+            AccountTransaction accountTransaction = accountTransactionRepository.getAccountAmountByTransactionID(transactionID);
+            return new AccountTransactionDto(accountTransaction);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from DB",e);
+        }
+    }
 }
