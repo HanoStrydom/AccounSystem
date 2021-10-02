@@ -7,6 +7,7 @@ import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.io.Serializable;
+import java.security.PrivateKey;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -18,8 +19,6 @@ public class AccountTransactionDto implements Serializable {
     private LocalDate transactionDate;
     private String firstName;
     private String lastName;
-
-
 
     public AccountTransactionDto(Long amount, LocalDate transactionDate, String firstName, String lastName) {
         this.amount = amount;
@@ -42,8 +41,6 @@ public class AccountTransactionDto implements Serializable {
 
 
     //GETTERS
-
-
     @ApiModelProperty(position = 1,
             value = "AccountTransaction amount",
             name = "amount",
@@ -121,7 +118,6 @@ public class AccountTransactionDto implements Serializable {
     public int hashCode() {
         return Objects.hash(amount, transactionDate, firstName, lastName);
     }
-
 
     //TOSTRING
     @Override

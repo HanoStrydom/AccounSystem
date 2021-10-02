@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
+import za.ac.nwu.ac.domain.persistence.AccountTransaction;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 
 import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
@@ -61,7 +63,6 @@ public class AccountTransactionController
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    //@GetMapping("{Show-Amount}")
     @GetMapping("/{transactionID}")
     @ApiOperation(value =  "Fetches the specified Account", notes = "Fetches the specified Amount for a given TransactionID")
     @ApiResponses(value = {
@@ -84,8 +85,7 @@ public class AccountTransactionController
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //TODO: REMOVE IF NOT WORKING1
-    @PutMapping("/{accountTypeID}")
+    @PutMapping("/{accountTransactionID}" )
     @ApiOperation(value =  "Sets the new ID", notes = "Sets the new AccountTypeID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "FOUND"),
@@ -94,11 +94,11 @@ public class AccountTransactionController
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
     })
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> setAccountTypeID(
-            @ApiParam(value = "Changes to new AccountTypeID",
+            @ApiParam(value = "Changes to new accountTransaction",
                     example = "40",
-                    name = "accountTypeID",
+                    name = "accountTransactionID",
                     required = true)
-            @PathVariable("accountTypeID") final Long accountTransactionID){
+            @PathVariable("accountTransactionID") final Long accountTransactionID){
 
         AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountTypeByTransactionID(accountTransactionID);
 
@@ -106,6 +106,30 @@ public class AccountTransactionController
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    //TODO: This wont work unless I comment out the above @PutMapping
+    @PutMapping("/{TransID}" )
+    @ApiOperation(value =  "Adds 200 to the new to the selected account", notes = "Adds 200 to the new to the selected account")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "FOUND"),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
+    })
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> setAccountAmount(
+            @ApiParam(value = "Adds 200 to selected account",
+                    example = "40",
+                    name = "TransID",
+                    required = true)
+            @PathVariable("TransID") final Long TransID){
+
+        AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountValueBy200(TransID);
+
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 
 }

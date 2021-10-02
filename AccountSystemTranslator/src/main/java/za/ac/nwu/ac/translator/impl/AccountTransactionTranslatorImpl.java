@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTransactionRepository;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
@@ -63,6 +64,17 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
     public AccountTransactionDto setAccountTypeByTransactionID(Long accountTransactionID) {
         try{
             int accountTransaction = accountTransactionRepository.setAccountTypeByTransactionID(accountTransactionID);
+            return new AccountTransactionDto(accountTransaction);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from DB",e);
+        }
+    }
+
+    @Override
+    public AccountTransactionDto setAccountValueBy200(Long transID) {
+        try{
+            int accountTransaction = accountTransactionRepository.setAccountValueBy200(transID);
             return new AccountTransactionDto(accountTransaction);
         }catch (Exception e)
         {
