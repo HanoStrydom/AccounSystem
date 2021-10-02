@@ -14,15 +14,12 @@ import java.util.Objects;
 @ApiModel(value = "AccountTransaction", description = "A DTO that represents the AccountTransaction")
 public class AccountTransactionDto implements Serializable {
 
-
     private Long amount;
     private LocalDate transactionDate;
     private String firstName;
     private String lastName;
 
-    public AccountTransactionDto() {
 
-    }
 
     public AccountTransactionDto(Long amount, LocalDate transactionDate, String firstName, String lastName) {
         this.amount = amount;
@@ -36,6 +33,11 @@ public class AccountTransactionDto implements Serializable {
         this.setTransactionDate(accountTransaction.getTransactionDate());
         this.setFirstName(accountTransaction.getFirstName());
         this.setLastName(accountTransaction.getLastName());
+    }
+
+
+
+    public AccountTransactionDto(int accountTransaction) {
     }
 
 
@@ -131,5 +133,6 @@ public class AccountTransactionDto implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
 
 }

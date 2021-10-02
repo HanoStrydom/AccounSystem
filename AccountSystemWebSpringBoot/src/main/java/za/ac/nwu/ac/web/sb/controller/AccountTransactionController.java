@@ -1,9 +1,6 @@
 package za.ac.nwu.ac.web.sb.controller;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -11,12 +8,11 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
-import za.ac.nwu.ac.domain.dto.AccountTypeDto;
-import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 
 import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.UpdateAccountTransactionFlow;
 
 import java.util.*;
 
@@ -26,12 +22,14 @@ public class AccountTransactionController
 {
     private final FetchAccountTransactionFlow fetchAccountTransactionFlow;
     private final CreateAccountTransactionFlow createAccountTransactionFlow;
+    private final UpdateAccountTransactionFlow updateAccountTransactionFlow;
 
     @Autowired
     public AccountTransactionController(FetchAccountTransactionFlow fetchAccountTransactionFlow,
-                                        @Qualifier("createAccountTransactionFlowName") CreateAccountTransactionFlow createAccountTransactionFlow) {
+                                        @Qualifier("createAccountTransactionFlowName") CreateAccountTransactionFlow createAccountTransactionFlow, UpdateAccountTransactionFlow updateAccountTransactionFlow) {
         this.fetchAccountTransactionFlow = fetchAccountTransactionFlow;
         this.createAccountTransactionFlow = createAccountTransactionFlow;
+        this.updateAccountTransactionFlow = updateAccountTransactionFlow;
     }
 
 
@@ -63,7 +61,6 @@ public class AccountTransactionController
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    //TODO: AccountTransactionController
     //@GetMapping("{Show-Amount}")
     @GetMapping("/{transactionID}")
     @ApiOperation(value =  "Fetches the specified Account", notes = "Fetches the specified Amount for a given TransactionID")
@@ -86,5 +83,29 @@ public class AccountTransactionController
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    //TODO: REMOVE IF NOT WORKING1
+    @PutMapping("/{accountTypeID}")
+    @ApiOperation(value =  "Sets the new ID", notes = "Sets the new AccountTypeID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "FOUND"),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
+    })
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> setAccountTypeID(
+            @ApiParam(value = "Changes to new AccountTypeID",
+                    example = "40",
+                    name = "accountTypeID",
+                    required = true)
+            @PathVariable("accountTypeID") final Long accountTypeID){
+
+        AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountTypeByTransactionID(accountTypeID);
+
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 }
