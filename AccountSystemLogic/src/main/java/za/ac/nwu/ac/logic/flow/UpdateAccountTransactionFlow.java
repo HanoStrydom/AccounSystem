@@ -8,6 +8,6 @@ public interface UpdateAccountTransactionFlow {
 
     List<AccountTransactionDto> getAllAccountTransactions();
 
-    AccountTransactionDto setAccountTypeByTransactionID(Long accountTypeID);
+    AccountTransactionDto setAccountTypeByTransactionID(Long accountTransactionID);
 }
 

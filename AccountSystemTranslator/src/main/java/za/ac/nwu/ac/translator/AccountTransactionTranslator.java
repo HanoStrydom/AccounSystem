@@ -12,5 +12,5 @@ public interface AccountTransactionTranslator {
 
     AccountTransactionDto getAccountAmountByTransactionID(Long transactionID);
 
-    AccountTransactionDto setAccountTypeByTransactionID(Long accountTypeID);
+    AccountTransactionDto setAccountTypeByTransactionID(Long accountTransactionID);
 }

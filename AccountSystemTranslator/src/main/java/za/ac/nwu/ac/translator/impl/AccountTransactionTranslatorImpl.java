@@ -60,9 +60,9 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
     }
 
     @Override
-    public AccountTransactionDto setAccountTypeByTransactionID(Long accountTypeID) {
+    public AccountTransactionDto setAccountTypeByTransactionID(Long accountTransactionID) {
         try{
-            int accountTransaction = accountTransactionRepository.setAccountTypeByTransactionID(accountTypeID);
+            int accountTransaction = accountTransactionRepository.setAccountTypeByTransactionID(accountTransactionID);
             return new AccountTransactionDto(accountTransaction);
         }catch (Exception e)
         {

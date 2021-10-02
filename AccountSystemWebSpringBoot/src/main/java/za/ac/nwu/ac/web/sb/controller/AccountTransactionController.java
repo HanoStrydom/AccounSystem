@@ -98,9 +98,9 @@ public class AccountTransactionController
                     example = "40",
                     name = "accountTypeID",
                     required = true)
-            @PathVariable("accountTypeID") final Long accountTypeID){
+            @PathVariable("accountTypeID") final Long accountTransactionID){
 
-        AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountTypeByTransactionID(accountTypeID);
+        AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountTypeByTransactionID(accountTransactionID);
 
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
 

@@ -25,8 +25,8 @@ public class UpdateAccountTransactionFlowImpl implements UpdateAccountTransactio
     }
 
     @Override
-    public AccountTransactionDto setAccountTypeByTransactionID(Long accountTypeID) {
-        return accountTransactionTranslator.setAccountTypeByTransactionID(accountTypeID);
+    public AccountTransactionDto setAccountTypeByTransactionID(Long accountTransactionID) {
+        return accountTransactionTranslator.setAccountTypeByTransactionID(accountTransactionID);
     }
 
 

@@ -23,8 +23,8 @@ public interface AccountTransactionRepository extends JpaRepository<AccountTrans
 
 
     @Modifying
-    @Query(value = "UPDATE AccountTransaction SET accountTypeID = 66 WHERE transactionID = :accountTypeID")
-    int setAccountTypeByTransactionID(Long accountTypeID);
+    @Query(value = "UPDATE AccountTransaction SET accountTypeID = 66 WHERE transactionID = :accountTransactionID")
+    int setAccountTypeByTransactionID(Long accountTransactionID);
 
 
 
