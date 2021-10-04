@@ -62,4 +62,15 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         }
     }
 
+    @Override
+    public AccountTypeDto setNewMnemonic(Long typeID) {
+        try{
+            int accountType = accountTypeRepository.setNewMnemonic(typeID);
+            return new AccountTypeDto(accountType);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from the DB",e);
+        }
+    }
+
 }

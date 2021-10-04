@@ -35,5 +35,10 @@ public class UpdateAccountTransactionFlowImpl implements UpdateAccountTransactio
         return accountTransactionTranslator.setAccountValueBy200(transID);
     }
 
+    @Override
+    public AccountTransactionDto setAccountValueMinus200(Long tranactID) {
+        return accountTransactionTranslator.setAccountValueMinus200(tranactID);
+    }
+
 
 }

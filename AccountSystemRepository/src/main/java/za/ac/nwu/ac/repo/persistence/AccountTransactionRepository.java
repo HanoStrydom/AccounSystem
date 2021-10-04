@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.persistence.AccountType;
-
+import java.util.*;
+import java.time.LocalDate;
 import javax.transaction.Transactional;
 
 @Repository
@@ -23,13 +24,18 @@ public interface AccountTransactionRepository extends JpaRepository<AccountTrans
 
 
     @Modifying
-    @Query(value = "UPDATE AccountTransaction SET accountTypeID = 37 WHERE transactionID = :accountTransactionID")
+    @Query(value = "UPDATE AccountTransaction SET accountTypeID = 1 WHERE transactionID = :accountTransactionID")
     int setAccountTypeByTransactionID(Long accountTransactionID);
+
+    LocalDate date = LocalDate.now();
+    String dateString = date.toString();
+
+    @Modifying
+    @Query(value = "UPDATE AccountTransaction set amount = amount + 200, transactionDate = current_date WHERE transactionID = :transID")
+    int setAccountValueBy200(Long transID);
 
 
     @Modifying
-    @Query(value = "UPDATE AccountTransaction set amount = amount + 200 WHERE transactionID = :TransID")
-    int setAccountValueBy200(Long TransID);
-
-
+    @Query(value = "UPDATE AccountTransaction set amount = amount - 200, transactionDate = current_date WHERE transactionID = :transactID")
+    int setAccountValueMinus200(Long transactID);
 }

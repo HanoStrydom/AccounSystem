@@ -10,4 +10,8 @@ public interface AccountTypeTranslator {
     AccountTypeDto create(AccountTypeDto accountType);
 
     AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
+
+    AccountTypeDto setNewMnemonic(Long typeID);
+
+
 }

@@ -81,4 +81,16 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             throw new RuntimeException("Unable to read from DB",e);
         }
     }
+
+    @Override
+    public AccountTransactionDto setAccountValueMinus200(Long transactID) {
+        try{
+            int accountTransaction = accountTransactionRepository.setAccountValueMinus200(transactID);
+            return new AccountTransactionDto(accountTransaction);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from DB",e);
+        }
+    }
+
 }
