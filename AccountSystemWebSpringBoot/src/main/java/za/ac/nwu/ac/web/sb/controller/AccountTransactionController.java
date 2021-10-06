@@ -127,7 +127,26 @@ public class AccountTransactionController
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    //TODO: Decrease Value by 200
+    @PutMapping("/putMinus200/{transactID}" )
+    @ApiOperation(value =  "Minus 200 to the new to the selected account", notes = "Minus 200 to the new to the selected account")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "FOUND"),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
+    })
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> DecreaseAmount(
+            @ApiParam(value = "Minus 200 to selected account",
+                    example = "37",
+                    name = "transactID",
+                    required = true)
+            @PathVariable("transactID") final Long transactID){
 
+        AccountTransactionDto accountTransaction = updateAccountTransactionFlow.setAccountValueMinus200(transactID);
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 
 
